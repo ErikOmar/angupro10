@@ -3,14 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-error404',
   templateUrl: './error404.component.html',
-  styles: [
-  ]
+  styleUrls: ['./error404.component.css']
 })
-export class Error404Component implements OnInit {
+export class Error404Component{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  year = new Date().getFullYear();
 
 }

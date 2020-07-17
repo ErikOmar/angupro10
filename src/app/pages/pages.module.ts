@@ -1,13 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { PagesRoutingModule } from './pages.routing';
-import { SharedModule } from '../shared/shared.module'
+import {PagesRoutingModule} from './pages.routing';
+import {SharedModule} from '../shared/shared.module'
+import {ComponentsModule} from '../components/components.module'
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProgressComponent } from './progress/progress.component';
-import { GraphicComponent } from './graphic/graphic.component';
-import { PagesComponent } from './pages.component';
+
+
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {ProgressComponent} from './progress/progress.component';
+import {GraphicComponent} from './graphic/graphic.component';
+import {PagesComponent} from './pages.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { PagesComponent } from './pages.component';
   imports: [
     CommonModule,
     SharedModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    ComponentsModule
   ], exports: [
     PagesComponent,
     DashboardComponent,
@@ -27,4 +31,4 @@ import { PagesComponent } from './pages.component';
     GraphicComponent
   ]
 })
-export class PagesModule { }
+export class PagesModule {}

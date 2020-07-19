@@ -13,6 +13,8 @@ export class SidebarService {
         {path: '/dashboard', titulo: 'Main'},
         {path: '/dashboard/progress', titulo: 'Progres Bar'},
         {path: '/dashboard/graphic', titulo: 'Graficas'},
+        {path: '/dashboard/promises', titulo: 'Promesas'},
+        {path: '/dashboard/rxjs', titulo: 'RxJs'},
       ]
     }
   ]

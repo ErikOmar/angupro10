@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.renderButton();
+    //this.renderButton();
 
     this.email = localStorage.getItem('email') || '';
     this.loginForm.controls['email'].setValue(this.email);

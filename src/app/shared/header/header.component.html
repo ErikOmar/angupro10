@@ -215,7 +215,7 @@
               aria-haspopup="true"
               aria-expanded="false"
               ><img
-                src="assets/images/users/kire.jpg"
+                [src]="usuario.imagenUrl"
                 alt="user"
                 class="profile-pic"
             /></a>
@@ -224,11 +224,11 @@
                 <li>
                   <div class="dw-user-box">
                     <div class="u-img">
-                      <img src="assets/images/users/kire.jpg" alt="user" />
+                      <img [src]="usuario.imagenUrl" alt="user" />
                     </div>
                     <div class="u-text">
-                      <h4>Erik Carrillo</h4>
-                      <p class="text-muted">varun@gmail.com</p>
+                      <h4>{{ usuario.nombre }}</h4>
+                      <p class="text-muted">{{ usuario.email }}</p>
                       <a
                         href="pages-profile.html"
                         class="btn btn-rounded btn-danger btn-sm"
@@ -239,7 +239,7 @@
                 </li>
                 <li role="separator" class="divider"></li>
                 <li>
-                  <a href="#"><i class="ti-user"></i> My Profile</a>
+                  <a routerLink="/dashboard/profile"><i class="ti-user"></i> My Profile</a>
                 </li>
                 <li>
                   <a href="#"><i class="ti-wallet"></i> My Balance</a>

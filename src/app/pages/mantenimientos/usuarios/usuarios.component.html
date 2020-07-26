@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <input #txtBuscar type="text" class="form-control" placeholder="Buscar Usuario" (keydown)="buscar( txtBuscar.value )">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="cargando" class="row">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+  </div>
+</div>
+
+<div  class="row animated fade-in" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Total usuarios ({{ this.totalUsuarios }})</h4>
+        <h6 class="card-subtitle">Usuario registrados</h6>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Avatar</th>
+                <th>Correo</th>
+                <th>Nombre</th>
+                <th class="w100">Rol</th>
+                <th class="w100">Auth</th>
+                <th class="w100 text-nowrap">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios">
+                <td class="text-center"><img [src]="usuario.imagenUrl" class="avatar cursor" (click)="abrirModal(usuario)"/></td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.nombre}}</td>
+                <td>
+                  <select class="form-control" [(ngModel)]="usuario.role" (change)="cambiarRole(usuario)">
+                    <option value="ADMIN_ROLE">Administrador</option>
+                    <option value="USER_ROLE">Usuario</option>
+                  </select>
+                </td>
+                <td>
+                  <span *ngIf="usuario.google" class="label label-info">Google</span>
+                  <span *ngIf="!usuario.google" class="label label-success">Normal</span>
+                </td>    
+                <td class="text-nowrap text-center">
+                  <a class="cursor" data-toggle="tooltip" data-original-title="Borrar" (click)="eliminarUsuario(usuario)"> <i class="fa fa-close text-danger"></i>
+                  </a>
+                </td>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn btn-secondary" (click)="cambiarPagina(-5)">Anteriores</button>
+        &nbsp;
+        <button class="btn btn-secondary" (click)="cambiarPagina(5)">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,15 @@ export class SidebarService {
         {path: '/dashboard/promises', titulo: 'Promesas'},
         {path: '/dashboard/rxjs', titulo: 'RxJs'},
       ]
+    },
+    {
+      titulo: 'Mantenimiento',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        {path: '/dashboard/usuarios', titulo: 'Usuarios'},
+        {path: '/dashboard/hospitales', titulo: 'Hospitales'},
+        {path: '/dashboard/medicos', titulo: 'Medicos'},
+      ]
     }
   ]
 

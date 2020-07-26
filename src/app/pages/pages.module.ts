@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import {PagesRoutingModule} from './pages.routing';
 import {SharedModule} from '../shared/shared.module'
@@ -15,7 +16,7 @@ import {AccountSettingsComponent} from './account-settings/account-settings.comp
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     AccountSettingsComponent,
     PromisesComponent,
     RxjsComponent,
-    PerfilComponent
+    PerfilComponent,
+    UsuariosComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     PagesRoutingModule,

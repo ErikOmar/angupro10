@@ -1,12 +1,14 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, catchError, delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
 
 import { RegisterForm } from '../interfaces/register-form-interfase';
 import { LoginForm } from '../interfaces/login-form-interfase';
-import { environment } from 'src/environments/environment';
-import { of } from 'rxjs';
+import { CargarUsuario } from '../interfaces/cargar-usuarios.interfase';
+
 import { Usuario } from '../models/usuario.model';
 
 const base_url = environment.base_url;
@@ -20,6 +22,7 @@ export class UsuarioService {
   public auth2: any;
   public usuraio: Usuario;
 
+
   constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) {
     // this.googleInit();
   }
@@ -30,6 +33,14 @@ export class UsuarioService {
 
   get uid(): string {
     return this.usuraio.uid || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
   }
 
   googleInit() {
@@ -48,7 +59,7 @@ export class UsuarioService {
   }
 
   validarToken() {
-  
+
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
         'x-token': this.token
@@ -56,7 +67,7 @@ export class UsuarioService {
     }).pipe(
       map((resp: any) => {
 
-        const {email, google, nombre, role, img, uid} = resp.usuario;
+        const { email, google, nombre, role, img, uid } = resp.usuario;
         this.usuraio = new Usuario(nombre, email, '', img, google, role, uid);
         localStorage.setItem('token', resp.token);
 
@@ -73,19 +84,31 @@ export class UsuarioService {
     );
   }
 
-  actualizarPeril( data: {email:string, nombre: string, role: string}){
+  eliminarUsuario(uid: string) {
+    //usuarios/5f160f5dce63672cb80a3e14
+    const url = `${base_url}/usuarios/${uid}`;
+    return this.http.delete(url, this.headers);
+  }
+
+  actualizarPeril(data: { email: string, nombre: string, role: string }) {
 
     data = {
       ...data,
       role: this.usuraio.role || 'USER_ROLE'
     }
-    
+
     return this.http.put(`${base_url}/usuarios/${this.uid}`, data, {
       headers: {
         'x-token': this.token
-      }});
+      }
+    });
   }
 
+  actualizarUsuario( usuario: Usuario ) {
+
+    return this.http.put(`${base_url}/usuarios/${usuario.uid}`, usuario, this.headers);
+  }
+  
   login(formData: LoginForm) {
 
     if (formData.remember) {
@@ -116,5 +139,22 @@ export class UsuarioService {
         this.router.navigateByUrl('/login');
       })
     });
+  }
+
+  cargarUsuarios(desde: number = 0) {
+    const url = `${base_url}/usuarios?desde=${desde}`;
+    return this.http.get<CargarUsuario>(
+      url,
+      this.headers).pipe(
+        map(resp => {
+          const usuarios = resp.usuarios
+            .map(user => new Usuario(user.nombre, user.email, '', user.img, user.google, user.role, user.uid))
+          return {
+            total: resp.total,
+            usuarios
+          };
+        })
+      );
+
   }
 }

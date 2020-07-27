@@ -49,7 +49,7 @@ export class ModalImagenComponent implements OnInit {
     this.cargarImagenService
       .actualizarForo(this.imagenSubir, tipo, id)
       .then(img => {
-        Swal.fire('Usuario', 'Imagen actualizada', 'success');
+        Swal.fire(`${tipo}`, 'Imagen actualizada', 'success');
 
         this.modalImagenService.nuevaImagen.emit(img);
 

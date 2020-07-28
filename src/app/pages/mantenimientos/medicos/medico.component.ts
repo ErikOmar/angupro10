@@ -57,7 +57,7 @@ export class MedicoComponent implements OnInit {
     .pipe(
       delay(100)
     )
-    .subscribe(medico => {
+    .subscribe((medico: any) => {
       
       if(!medico){
         this.router.navigateByUrl(`/dashboard/medicos`);

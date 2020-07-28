@@ -46,7 +46,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
 
     if(nombre.length > 1){
       this.busquedasService.buscar('Medicos', nombre)
-      .subscribe( resp => {
+      .subscribe( (resp : any) => {
         this.medicos = resp;
       })
     }
@@ -66,7 +66,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
   guardarCambios(medico: Medico) {
     console.log(medico);
 
-    this.medicoService.actualizarMedico(medico.uid, medico.nombre)
+    this.medicoService.actualizarMedico(medico)
       .subscribe(resp => {
         Swal.fire('Actualizado', medico.nombre, 'success');
       })

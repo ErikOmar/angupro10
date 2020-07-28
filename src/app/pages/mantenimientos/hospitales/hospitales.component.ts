@@ -91,7 +91,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
     if (value.trim().length > 0) {
       this.hospitalService.crearHospital(value).subscribe(
-        resp => {
+        (resp:any) => {
 
           this.hospitales.push(resp.hospital)
 
